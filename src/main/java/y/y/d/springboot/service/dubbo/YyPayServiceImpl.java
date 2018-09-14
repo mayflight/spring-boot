@@ -12,7 +12,7 @@ public class YyPayServiceImpl implements YyPayService {
     @Override
     public DealOrderResult dealOrder(Order order) {
         DealOrderResult result = new DealOrderResult();
-        result.setError("success,dubbo");
+        result.setError("success,spring_boot");
         return result;
     }
 }
