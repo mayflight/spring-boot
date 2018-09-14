@@ -7,14 +7,12 @@ import com.yadong.ye.dubbo.YyPayService;
 /**
  * @author Ton
  */
-//@Component
-@Service(timeout = 30000,
-        delay = -1)
+@Service(timeout = 30000)
 public class YyPayServiceImpl implements YyPayService {
     @Override
     public DealOrderResult dealOrder(Order order) {
         DealOrderResult result = new DealOrderResult();
-        result.setError("success");
+        result.setError("success,dubbo");
         return result;
     }
 }
