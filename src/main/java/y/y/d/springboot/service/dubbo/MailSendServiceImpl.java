@@ -1,6 +1,7 @@
 package y.y.d.springboot.service.dubbo;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.yadong.ye.bean.BaseResult;
 import com.yadong.ye.bean.MailDetailData;
 import com.yadong.ye.dubbo.MailSendService;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,9 +23,12 @@ public class MailSendServiceImpl implements MailSendService{
     private String sendMailAccount;
 
     @Override
-    public void sendSimpleMail(MailDetailData mailDetailData) {
+    public BaseResult sendSimpleMail(MailDetailData mailDetailData) {
+        BaseResult result = new BaseResult();
         if (null == mailDetailData) {
-            return;
+            result.setCode(1);
+            result.setMessage("mailDetailData is null");
+            return result;
         }
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(sendMailAccount);
@@ -34,7 +38,12 @@ public class MailSendServiceImpl implements MailSendService{
         try {
             mailSender.send(message);
         }catch (Exception e) {
-            e.printStackTrace();
+            result.setCode(1);
+            result.setMessage(e.getMessage());
+            return result;
         }
+        result.setCode(0);
+        result.setMessage("send success");
+        return result;
     }
 }
